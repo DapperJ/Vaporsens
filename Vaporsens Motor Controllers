@@ -31,47 +31,59 @@ void initializeRobot()
 task main()
 {
 	initializeRobot();
-
+	float speed = 1.0;
 	waitForStart();   // wait for start of tele-op phase
 	while(true) {
 		getJoystickSettings(joystick);
 
-		if (joystick.joy1_TopHat == pov_north) //Move Forwards
-		{
-			motor (Left) = 75;
-			motor (Right) = -75;
+
+
+		if(joystick.joy1_Buttons == button_b){
+			speed = 0.25 ;
+
 		}
-		else if (joystick.joy1_TopHat == pov_south) //Move Backwards
-		{
-			motor (Left) = -75;
-			motor (Right) = 75;
+		if(joystick.joy1_Buttons == button_x){
+			speed = 1.0;
+
 		}
-		else if (joystick.joy1_Buttons == button_06) //Turn Left
+
+
+		if (joystick.joy1_TopHat == pov_north)
 		{
-			motor (Left) = 75;
-			motor (Right) = 75;
+			motor (Left) = 100*speed;
+			motor (Right) = -100*speed;
 		}
-		else if (joystick.joy1_Buttons == button_07) //Turn Right
+		else if (joystick.joy1_TopHat == pov_south)
 		{
-			motor (Left) = -75;
-			motor (Right) = -75;
+			motor (Left) = -100*speed;
+			motor (Right) = 100*speed;
+		}
+		else if (joystick.joy1_Buttons == button_06)
+		{
+			motor (Left) = 100*speed;
+			motor (Right) = 100*speed;
+		}
+		else if (joystick.joy1_Buttons == button_07)
+		{
+			motor (Left) = -100*speed;
+			motor (Right) = -100*speed;
 		}
 		else if (joystick.joy1_Buttons == button_04)
 		{
-			motor (ArmA) = 50;
+			motor (ArmA) = 100*speed;
 		}
 		else if (joystick.joy1_Buttons == button_05)
 		{
-			motor (ArmA) = -50;
+			motor (ArmA) = -100*speed;
 		}
 		else if (joystick.joy1_Buttons == button_y)
 		{
-			motor (ArmB) = 50;
+			motor (ArmB) = 100*speed;
 		}
 
 		else if (joystick.joy1_Buttons == button_a)
 		{
-			motor (ArmB) = -50;
+			motor (ArmB) = -100*speed;
 		}
 		else {
 			motor (Left) = 0;
